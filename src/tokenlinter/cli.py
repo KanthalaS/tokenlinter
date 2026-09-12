@@ -10,14 +10,14 @@ import typer
 from rich.console import Console
 
 from tokenlinter import __version__
-from tokenlinter.schema import validate_tokens
+from tokenlinter.linter import lint
 
 app = typer.Typer(
     name="tokenlinter",
     help="Validate design tokens (W3C DTCG) and enforce WCAG contrast.",
     no_args_is_help=True,
 )
-console = Console()
+console = Console(soft_wrap=True)
 
 
 def _version_callback(value: bool) -> None:
@@ -61,7 +61,7 @@ def validate(
             console.print(f"[red]Cannot read {token_file}: {exc}[/red]")
             raise typer.Exit(1) from exc
 
-    errors = validate_tokens(payload)
+    errors = lint(payload)
     if errors:
         console.print(f"[red]Found {len(errors)} problem(s):[/red]")
         for error in errors:

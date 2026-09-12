@@ -5,9 +5,16 @@ Python-native design-token QA. Validates design tokens in the
 contrast, so design systems catch drift and accessibility regressions before
 they ship.
 
-**Status:** scaffold (pre-alpha). Roadmap: full DTCG schema validation, alias
-resolution, WCAG contrast engine, token-drift reports, pre-commit hook and
-GitHub Action.
+**Status:** pre-alpha. DTCG structural checks (groups, token types) and
+alias resolution are implemented; the WCAG contrast engine, token-drift
+reports, and pre-commit hook are on the roadmap.
+
+## What it checks
+
+- DTCG structure: group nesting vs tokens, unknown `$type` values
+- Alias references: `{path.to.token}` resolution against the token map,
+  dangling targets, and cyclic chains
+- (Roadmap) WCAG contrast ratios for color-token pairs
 
 ## Quick start
 
@@ -27,7 +34,7 @@ Try the bundled examples:
 
 ```console
 uv run tokenlinter validate examples/tokens.json           # valid → exit 0
-uv run tokenlinter validate examples/tokens.invalid.json  # 6 violations → exit 1
+uv run tokenlinter validate examples/tokens.invalid.json  # 8 violations → exit 1
 ```
 
 ## Development

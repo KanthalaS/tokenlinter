@@ -1,15 +1,14 @@
-"""DTCG (Design Tokens Community Group) validation for tokenlinter.
+"""DTCG (Design Tokens Community Group) structural validation.
 
-This module holds the first slice of structural validation: group nesting,
-token types, and basic alias-reference checks. The full DTCG format rules
-will be folded in as machine-readable JSON Schemas in a later milestone.
+Holds the structural slice: group nesting and token types. Alias rules live
+in :mod:`tokenlinter.aliases`, and the WCAG contrast engine will join the
+lint pipeline in a later milestone.
 
 Spec reference: https://tr.designtokens.org/format/
 """
 
 from __future__ import annotations
 
-import re
 from typing import Any
 
 # Keys reserved by the DTCG format at the token level.
@@ -36,9 +35,6 @@ KNOWN_TYPES = frozenset(
         "typography",
     }
 )
-
-# References look like {path.to.token} inside a string value.
-_ALIAS_RE = re.compile(r"\{([^{}]*)\}")
 
 
 def validate_tokens(payload: Any) -> list[str]:
@@ -76,10 +72,3 @@ def _validate_token(token: dict[str, Any], *, path: str, errors: list[str]) -> N
     if token_type is not None and token_type not in KNOWN_TYPES:
         known = ", ".join(sorted(KNOWN_TYPES))
         errors.append(f"{path}: unknown $type {token_type!r} (known types: {known})")
-    value = token.get("$value")
-    if isinstance(value, str):
-        for ref in _ALIAS_RE.findall(value):
-            # Full alias resolution lands with the DTCG schema milestone;
-            # for now only empty references are a structural error.
-            if not ref.strip():
-                errors.append(f"{path}: empty alias reference {{}}")

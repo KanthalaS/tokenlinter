@@ -1,6 +1,6 @@
 [project]
 name = "tokenlinter"
-version = "0.1.0"
+version = "0.2.0"
 description = "Python-native design-token QA: validates W3C DTCG token documents and enforces WCAG contrast."
 readme = "README.md"
 requires-python = ">=3.11"

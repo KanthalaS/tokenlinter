@@ -2,7 +2,8 @@
   "color": {
     "brand": {
       "primary": { "$type": "color", "$value": "#0a7d33" },
-      "primary-hover": { "$type": "color", "$value": "{}" }
+      "primary-hover": { "$type": "color", "$value": "{}" },
+      "missing-target": { "$type": "color", "$value": "{color.brand.does-not-exist}" }
     },
     "mystery": { "$type": "banana", "$value": "#ff00ff" },
     "typed-as-number": { "$type": 77, "$value": "#000000" }
@@ -15,5 +16,9 @@
   },
   "typography": {
     "font-size-sm": { "$type": "fontSize", "$value": "12px" }
+  },
+  "mode": {
+    "a": { "$value": "{mode.b}" },
+    "b": { "$value": "{mode.a}" }
   }
 }
