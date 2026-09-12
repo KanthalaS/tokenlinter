@@ -1,0 +1,19 @@
+{
+  "color": {
+    "brand": {
+      "primary": { "$type": "color", "$value": "#0a7d33" },
+      "primary-hover": { "$type": "color", "$value": "{}" }
+    },
+    "mystery": { "$type": "banana", "$value": "#ff00ff" },
+    "typed-as-number": { "$type": 77, "$value": "#000000" }
+  },
+  "spacing": {
+    "xs": "4px"
+  },
+  "radius": {
+    "pill": { "$type": "radius", "$value": "999px" }
+  },
+  "typography": {
+    "font-size-sm": { "$type": "fontSize", "$value": "12px" }
+  }
+}

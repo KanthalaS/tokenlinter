@@ -38,7 +38,7 @@ KNOWN_TYPES = frozenset(
 )
 
 # References look like {path.to.token} inside a string value.
-_ALIAS_RE = re.compile(r"\{([^{}]+)\}")
+_ALIAS_RE = re.compile(r"\{([^{}]*)\}")
 
 
 def validate_tokens(payload: Any) -> list[str]:

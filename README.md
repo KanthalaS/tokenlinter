@@ -23,10 +23,11 @@ Pipe a document in instead of a file:
 cat path/to/tokens.json | uv run tokenlinter validate
 ```
 
-Try the bundled example:
+Try the bundled examples:
 
 ```console
-uv run tokenlinter validate examples/tokens.json
+uv run tokenlinter validate examples/tokens.json           # valid → exit 0
+uv run tokenlinter validate examples/tokens.invalid.json  # 6 violations → exit 1
 ```
 
 ## Development
