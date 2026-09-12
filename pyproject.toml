@@ -4,7 +4,8 @@ version = "0.3.0"
 description = "Python-native design-token QA: validates W3C DTCG token documents and enforces WCAG contrast."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "Santhosh Reddy Kanthala", email = "kanthala.santhosh@gmail.com" }]
 keywords = [
     "design-tokens",
@@ -39,6 +40,10 @@ dev = [
     "pytest-cov>=5.0",
     "ruff>=0.4",
 ]
+
+[project.urls]
+Repository = "https://github.com/KanthalaS/tokenlinter"
+Issues = "https://github.com/KanthalaS/tokenlinter/issues"
 
 [project.scripts]
 tokenlinter = "tokenlinter.cli:app"

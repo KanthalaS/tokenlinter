@@ -19,12 +19,20 @@ rendering, and a pre-commit hook are implemented.
 - Token drift: added, removed, and changed tokens between two documents,
   compared on resolved values so alias-versus-literal is not a false positive
 
-## Quick start
+## Install
+
+```console
+pip install tokenlinter
+```
+
+or from source with uv:
 
 ```console
 uv sync --extra dev
 uv run tokenlinter --version
 ```
+
+## Quick start
 
 Try the bundled examples:
 
@@ -67,6 +75,24 @@ uv run pre-commit install
 
 Every commit then validates any `tokens.json` / `token.json` file in the repo.
 The same check runs in CI (`uv run pre-commit run --all-files`).
+
+## Publishing to PyPI
+
+Building and uploading is handled by `uv publish`. CI publishes automatically
+when a `v*` tag is pushed:
+
+```console
+git tag v0.3.0 && git push origin v0.3.0
+```
+
+- Set the `PYPI_API_TOKEN` repository secret (a PyPI API token with upload
+  scope on the `tokenlinter` project) in Settings → Secrets and variables →
+  Actions. Without it the publish job fails at upload — tests still pass.
+- Local alternative: `uv build && UV_PUBLISH_TOKEN=<token> uv publish`.
+- TestPyPI dry run: `UV_PUBLISH_URL=https://test.pypi.org/legacy/ uv publish`.
+
+The version must match the released tag (`pyproject.toml` → `version`), and CI
+runs `uv build` so wheel and sdist are always built from the pushed commit.
 
 ## Development
 
