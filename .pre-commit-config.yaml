@@ -1,0 +1,12 @@
+# Pre-commit hooks for tokenlinter contributors.
+#
+# Run `uv run pre-commit install` once to activate; every commit then
+# validates any DTCG token file in the repo (tokens.json / token.json).
+repos:
+  - repo: local
+    hooks:
+      - id: tokenlinter-validate
+        name: "tokenlinter: validate DTCG design tokens"
+        entry: tokenlinter validate
+        language: system
+        files: 'tokens?\.json$'
